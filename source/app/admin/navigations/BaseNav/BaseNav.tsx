@@ -24,14 +24,14 @@ export const BaseNav = () => {
           },
           {
             url: EAdminNavigation.customers,
-            label: 'Customers',
+            label: 'Customers blablabla',
             icon: PersonIcon,
           },
-          {
-            url: EAdminNavigation.categories,
-            label: 'Categories',
-            icon: PersonIcon,
-          },
+          // {
+          //   url: EAdminNavigation.categories,
+          //   label: 'Categories',
+          //   icon: PersonIcon,
+          // },
           {
             url: EAdminNavigation.products,
             label: 'Products',
@@ -41,6 +41,11 @@ export const BaseNav = () => {
                 url: EAdminNavigation.categories,
                 disabled: false,
                 label: 'Categories',
+              },
+              {
+                url: EAdminNavigation.productsReview,
+                disabled: false,
+                label: 'Products Reviews',
               },
             ],
           },
