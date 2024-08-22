@@ -44,6 +44,7 @@ model Customer {
   deletedAt DateTime?
 
   addresses CustomerAddress[]
+  Review    Review[]
 
   @@index([createdAt], name: "CustomerCreatedAtIndex")
   @@index([updatedAt], name: "CustomerUpdatedAtIndex")
@@ -115,6 +116,7 @@ model Product {
   // images          ProductImage[]
   // variants        ProductVariant[]
   // reviews         ProductReview[]
+  Review Review[]
 
   @@index([status], name: "ProductStatusIndex")
   @@index([categoryId], name: "ProductCategoryIdIndex")
@@ -126,6 +128,26 @@ model Product {
   @@index([compareAtPrice], name: "ProductCompareAtPriceIndex")
   @@index([avgRate], name: "ProductAvgRateIndex")
   @@index([totalReviews], name: "ProductTotalReviewsIndex")
+}
+
+model Review {
+  id         Int       @id @default(autoincrement())
+  customerId Int
+  productId  Int
+  review     String
+  rating     Int       @default(0)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
+
+  customer Customer @relation(fields: [customerId], references: [id])
+  product  Product  @relation(fields: [productId], references: [id])
+
+  @@index([customerId], name: "ReviewCustomerIdIndex")
+  @@index([productId], name: "ReviewProductIdIndex")
+  @@index([createdAt], name: "ReviewCreatedAtIndex")
+  @@index([updatedAt], name: "ReviewUpdatedAtIndex")
+  @@index([deletedAt], name: "ReviewDeletedAtIndex")
 }
 
 // Enums

@@ -43,7 +43,7 @@ export const BaseNav = () => {
                 label: 'Categories',
               },
               {
-                url: EAdminNavigation.productsReview,
+                url: EAdminNavigation.productsReviews,
                 disabled: false,
                 label: 'Products Reviews',
               },
