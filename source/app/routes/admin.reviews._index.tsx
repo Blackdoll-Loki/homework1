@@ -1,5 +1,14 @@
+import { EAdminNavigation } from "~/admin/constants/navigation.constant";
+import {PlusIcon} from '@shopify/polaris-icons';
+import {Page} from '@shopify/polaris';
+import {Index} from '~/admin/components/reviews/Index/Index';
+import {useLoaderData} from '@remix-run/react';
+import { TAdminReviewsLoaderData } from "~/.server/admin/loaders/reviews/index/loader";
+
+export {loader} from '~/.server/admin/loaders/reviews/index/loader';
+
 export default function AdminReviewsIndex() {
-  const data = useLoaderData<TAdminProductsLoader>();
+  const data = useLoaderData<TAdminReviewsLoaderData>();
 
   return (
     <Page
@@ -9,10 +18,10 @@ export default function AdminReviewsIndex() {
         content: 'Create review',
         icon: PlusIcon,
         accessibilityLabel: 'Create review',
-        url: EAdminNavigation.productsCreate,
+        url: EAdminNavigation.reviewCreate,
       }}
     >
-      <Index products={data.products} query={data.query} pagination={data.pagination}/>
+      <Index reviews={data.reviews} query={data.query} pagination={data.pagination}/>
     </Page>
   );
 }
