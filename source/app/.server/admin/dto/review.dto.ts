@@ -6,7 +6,7 @@ type ExcludedField = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
 export type TReviewDto = Omit<Review, ExcludedField> & {
   id: string;
   review:string;
-  rating: number;
+  rating: string;
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;

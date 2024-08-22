@@ -1,7 +1,5 @@
 import {json, LoaderFunctionArgs} from '@remix-run/node';
 import {prisma} from '~/.server/shared/services/prisma.service';
-import {withZod} from '@rvf/zod';
-import {z} from 'zod';
 import {Prisma} from '@prisma/client';
 import type {SerializeFrom} from '@remix-run/server-runtime';
 import { reviewMapper } from '~/.server/admin/mappers/review.mapper'
@@ -21,17 +19,9 @@ import {ESoftDeleteStatus} from '~/admin/constants/entries.constant';
 type CategoryOrderByWithRelationInput = Prisma.CategoryOrderByWithRelationInput;
 
 
-export const reviewQueryValidator = withZod(
-  z.object({
-  })
-);
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function loader({request}: LoaderFunctionArgs) {
   const searchParams = requestToSearchParams(request);
-  const {data} = await reviewQueryValidator.validate(
-    searchParams
-  );
   const search = await queryToSearch(searchParams);
   const pagination = await queryToPagination(searchParams);
   const sort = await queryToSort(searchParams, ECategoriesSortVariant, ECategoriesSortVariant.createdAt_desc);
@@ -50,17 +40,21 @@ export async function loader({request}: LoaderFunctionArgs) {
 
 
 
-  const reviews = await prisma.reviews.findMany({
+  const reviews = await prisma.review.findMany({
     take: pagination.take,
     skip: pagination.skip,
     where: {
       ...searchQuery,
     },
-    orderBy
+    orderBy,
+    include: {
+      product: true,
+      customer: true,
+    }
   });
 
   pagination.count = reviews.length;
-  pagination.total = await prisma.category.count({
+  pagination.total = await prisma.review.count({
     where: {
       ...searchQuery,
     }
@@ -68,7 +62,7 @@ export async function loader({request}: LoaderFunctionArgs) {
 
   pagination.hasNext = hasNextCalculate(pagination);
 
-  return json({reviews: reviews.map(reviewMapper), query: makeQuery(search, sort, data), pagination});
+  return json({reviews: reviews.map(reviewMapper), query: makeQuery(search, sort), pagination});
 }
 
 export type TAdminReviewsLoader = typeof loader;
