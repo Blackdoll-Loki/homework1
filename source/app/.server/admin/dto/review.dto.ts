@@ -5,7 +5,7 @@ import { TProductDto } from './product.dto';
 type ExcludedField = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
 export type TReviewDto = Omit<Review, ExcludedField> & {
   id: string;
-  review:string;
+  review:number;
   rating: string;
   createdAt: string;
   updatedAt: string;

@@ -31,7 +31,6 @@ export const NewReviewCard = () => {
       value: '5',
     }
   ]), []);
-
   return (
     <Card>
       <BlockStack gap="200">
@@ -43,10 +42,16 @@ export const NewReviewCard = () => {
             autoComplete="off"
           />
           <ValidatedTextField
-            label="Customer"
-            type="text"
-            name="customer"
-            autoComplete="off"
+              label="First Name"
+              type="text"
+              name="firstName"
+              autoComplete="given-name"
+            />
+          <ValidatedTextField
+              label="Last Name"
+              type="text"
+              name="lastName"
+              autoComplete="family-name"
           />
           <ValidatedSelect
             label="Rating"
