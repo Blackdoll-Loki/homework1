@@ -4,6 +4,7 @@ import {useSearchParams} from '@remix-run/react';
 import type {TAdminProductsLoaderData} from '~/.server/admin/loaders/products/index/loader';
 import {reqSortToSort, sortArrToReqSort} from '~/admin/utils/filter.util';
 import {ESoftDeleteStatus} from '~/admin/constants/entries.constant';
+import { TAdminReviewsLoaderData } from '~/.server/admin/loaders/reviews/index/loader';
 
 export enum EProductsSortVariant {
   createdAt_asc = 'createdAt_asc',
@@ -19,7 +20,7 @@ export enum EProductsSortVariant {
 }
 
 export interface FiltersProps {
-  query?: TAdminProductsLoaderData['query'];
+  query?: TAdminReviewsLoaderData['query'];
 }
 
 export const Filters: FC<FiltersProps> = ({query}) => {

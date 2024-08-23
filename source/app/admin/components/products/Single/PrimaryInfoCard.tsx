@@ -6,7 +6,7 @@ import {TProductDto} from '~/.server/admin/dto/product.dto';
 import { TReviewDto } from '~/.server/admin/dto/review.dto';
 
 export type PrimaryInfoCardProps = {
-  review: TReviewDto
+  product: TProductDto;
 }
 
 export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({product}) => {
@@ -61,6 +61,22 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({product}) => {
           </Text>
           <Text as="p" variant="bodyMd">
             {product.barcode}
+          </Text>
+        </BlockStack>
+        <BlockStack gap="200">
+          <Text as="h3" variant="headingXs" fontWeight="medium">
+            Total reviews
+          </Text>
+          <Text as="p" variant="bodyMd">
+            {product.totalReviews}
+          </Text>
+        </BlockStack>
+        <BlockStack gap="200">
+          <Text as="h3" variant="headingXs" fontWeight="medium">
+            Avg Rate
+          </Text>
+          <Text as="p" variant="bodyMd">
+            {product.avgRate}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
