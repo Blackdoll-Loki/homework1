@@ -31,11 +31,13 @@ export const Index: FC<ListProps> = ({products, query, pagination}) => {
     {title: 'Barcode'},
     {title: 'Status'},
     {title: 'Quantity'},
+    {title: 'Total reviews'},
+    {title: 'Avg Rate'},
   ]), []);
 
   const rowMarkup = products.map(
     (
-      {id, title, slug, sku, barcode, status, quantity, category},
+      {id, title, slug, sku, barcode, status, quantity, category, avgRate, totalReviews},
       index,
     ) => (
       <IndexTable.Row
@@ -52,6 +54,8 @@ export const Index: FC<ListProps> = ({products, query, pagination}) => {
         <IndexTable.Cell>{barcode}</IndexTable.Cell>
         <IndexTable.Cell>{status}</IndexTable.Cell>
         <IndexTable.Cell>{quantity}</IndexTable.Cell>
+        <IndexTable.Cell>{totalReviews}</IndexTable.Cell>
+        <IndexTable.Cell>{avgRate}</IndexTable.Cell>
       </IndexTable.Row>
     ),
   );
