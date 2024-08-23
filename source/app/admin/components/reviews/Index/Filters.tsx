@@ -1,88 +1,38 @@
 import {ChoiceList, IndexFilters, IndexFiltersProps, useSetIndexFiltersMode,} from '@shopify/polaris';
 import React, {FC, useCallback, useState} from 'react';
 import {useSearchParams} from '@remix-run/react';
-import type {TAdminProductsLoaderData} from '~/.server/admin/loaders/products/index/loader';
+import type {TAdminCategoriesLoaderData} from '~/.server/admin/loaders/categories/index/loader';
 import {reqSortToSort, sortArrToReqSort} from '~/admin/utils/filter.util';
 import {ESoftDeleteStatus} from '~/admin/constants/entries.constant';
-import { TAdminReviewsLoaderData } from '~/.server/admin/loaders/reviews/index/loader';
 
-export enum EProductsSortVariant {
+export enum ECategoriesSortVariant {
   createdAt_asc = 'createdAt_asc',
   createdAt_desc = 'createdAt_desc',
   updatedAt_asc = 'updatedAt_asc',
   updatedAt_desc = 'updatedAt_desc',
-  title_asc = 'title_asc',
-  title_desc = 'title_desc',
-  quantity_asc = 'quantity_asc',
-  quantity_desc = 'quantity_desc',
-  softDeleteStatus_asc = 'softDeleteStatus_asc',
-  softDeleteStatus_desc = 'softDeleteStatus_desc',
+  deletedAt_asc = 'deletedAt_asc',
+  deletedAt_desc = 'deletedAt_desc',
 }
 
 export interface FiltersProps {
-  query?: TAdminReviewsLoaderData['query'];
+  query?: TAdminCategoriesLoaderData['query'];
 }
 
 export const Filters: FC<FiltersProps> = ({query}) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
 
-
   /* SORT START */
   const sortOptions: IndexFiltersProps['sortOptions'] = [
-    {
-      label: 'Title',
-      value: reqSortToSort(EProductsSortVariant.title_asc),
-      directionLabel: 'A-Z'
-    },
-    {
-      label: 'Title',
-      value: reqSortToSort(EProductsSortVariant.title_desc),
-      directionLabel: 'Z-A'
-    },
-    {
-      label: 'Quantity',
-      value: reqSortToSort(EProductsSortVariant.quantity_asc),
-      directionLabel: 'Low to high'
-    },
-    {
-      label: 'Quantity',
-      value: reqSortToSort(EProductsSortVariant.quantity_desc),
-      directionLabel: 'High to low'
-    },
-    {
-      label: 'Status',
-      value: reqSortToSort(EProductsSortVariant.softDeleteStatus_asc),
-      directionLabel: 'A-Z'
-    },
-    {
-      label: 'Status',
-      value: reqSortToSort(EProductsSortVariant.softDeleteStatus_desc),
-      directionLabel: 'Z-A'
-    },
-    {
-      label: 'Created',
-      value: reqSortToSort(EProductsSortVariant.createdAt_asc),
-      directionLabel: 'Oldest to newest'
-    },
-    {
-      label: 'Created',
-      value: reqSortToSort(EProductsSortVariant.createdAt_desc),
-      directionLabel: 'Newest to oldest'
-    },
-    {
-      label: 'Updated',
-      value: reqSortToSort(EProductsSortVariant.updatedAt_asc),
-      directionLabel: 'Oldest to newest'
-    },
-    {
-      label: 'Updated',
-      value: reqSortToSort(EProductsSortVariant.updatedAt_desc),
-      directionLabel: 'Newest to oldest'
-    },
+    {label: 'Created', value: reqSortToSort(ECategoriesSortVariant.createdAt_asc), directionLabel: 'Oldest to newest'},
+    {label: 'Created', value: reqSortToSort(ECategoriesSortVariant.createdAt_desc), directionLabel: 'Newest to oldest'},
+    {label: 'Updated', value: reqSortToSort(ECategoriesSortVariant.updatedAt_asc), directionLabel: 'Oldest to newest'},
+    {label: 'Updated', value: reqSortToSort(ECategoriesSortVariant.updatedAt_desc), directionLabel: 'Newest to oldest'},
+    {label: 'Deleted', value: reqSortToSort(ECategoriesSortVariant.deletedAt_asc), directionLabel: 'Oldest to newest'},
+    {label: 'Deleted', value: reqSortToSort(ECategoriesSortVariant.deletedAt_desc), directionLabel: 'Newest to oldest'},
   ];
 
-  const sortOrder = query?.sort || EProductsSortVariant.createdAt_desc;
+  const sortOrder = query?.sort || ECategoriesSortVariant.createdAt_desc;
   const sortSelected = [reqSortToSort(sortOrder)];
 
   const setSortSelected = (value: string[]) => {
@@ -165,7 +115,7 @@ export const Filters: FC<FiltersProps> = ({query}) => {
   const filters = [
     {
       key: 'softDeleteStatus',
-      label: 'Account Status',
+      label: 'Soft Delete Status',
       filter: (
         <ChoiceList
           title="Role"
@@ -205,7 +155,7 @@ export const Filters: FC<FiltersProps> = ({query}) => {
       sortOptions={sortOptions}
       sortSelected={sortSelected}
       queryValue={queryValue}
-      queryPlaceholder="Search products"
+      queryPlaceholder="Search categories"
       onQueryChange={handleFiltersQueryChange}
       onQueryClear={() => handleFiltersQueryChange('')}
       onSort={setSortSelected}

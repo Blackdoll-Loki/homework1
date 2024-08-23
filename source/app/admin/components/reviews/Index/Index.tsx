@@ -7,6 +7,7 @@ import {IOffsetPaginationInfoDto} from '~/.server/shared/dto/offset-pagination-i
 import {usePagination} from '~/admin/hooks/usePagination';
 import { TReviewDto } from '~/.server/admin/dto/review.dto';
 import { TAdminReviewsLoaderData } from '~/.server/admin/loaders/reviews/index/loader';
+import { Filters } from './Filters';
 
 export interface ListProps {
   reviews: TReviewDto[];
@@ -57,6 +58,7 @@ export const Index: FC<ListProps> = ({reviews, query, pagination}) => {
 
   return (
     <Card padding="0">
+      <Filters query={query}/>
       <IndexTable
         resourceName={resourceName}
         itemCount={reviews.length}
