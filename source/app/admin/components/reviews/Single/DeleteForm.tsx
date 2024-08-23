@@ -2,10 +2,9 @@ import {Box, Button, Divider, InlineStack, Text} from '@shopify/polaris';
 import React, {FC} from 'react';
 import {ValidatedForm} from 'remix-validated-form';
 import {ValidatedSubmitButton} from '~/admin/ui/ValidatedSubmitButton/ValidatedSubmitButton';
-import type {TProductDto} from '~/.server/admin/dto/product.dto';
-import {deleteFormValidator} from '~/admin/components/products/Single/DeleteForm.validator';
+import {deleteFormValidator} from '~/admin/components/reviews/Single/DeleteForm.validator';
 import {ValidatedAction} from '~/admin/ui/ValidatedAction/ValidatedAction';
-import {EAdminProductAction} from '~/admin/constants/action.constant';
+import {EAdminReviewAction} from '~/admin/constants/action.constant';
 import { TReviewDto } from '~/.server/admin/dto/review.dto';
 
 type Props = {
@@ -19,7 +18,7 @@ export const DeleteForm: FC<Props> = (props) => {
   return (
     <ValidatedForm validator={deleteFormValidator} method="post" onSubmit={toggleActive}>
       <Box padding="200" paddingBlockEnd="0">
-        <ValidatedAction action={EAdminProductAction.deleteProduct}/>
+        <ValidatedAction action={EAdminReviewAction.deleteReview}/>
       </Box>
       <Box padding="400" paddingBlockStart="200">
         <Text as="p">

@@ -51,7 +51,6 @@ export const Index: FC<ListProps> = ({reviews, query, pagination}) => {
         <IndexTable.Cell>{rating}</IndexTable.Cell>
         <IndexTable.Cell>{createdAt}</IndexTable.Cell>
         <IndexTable.Cell>{deletedAt}</IndexTable.Cell>
-
       </IndexTable.Row>
     ),
   );
