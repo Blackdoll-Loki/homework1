@@ -45,8 +45,6 @@ export async function action({request}: ActionFunctionArgs) {
     },
   });
 
-  console.log(customerInDB)
-
   if (!customerInDB) {
     customerInDB = await prisma.customer.create({
       data: {
@@ -69,6 +67,17 @@ export async function action({request}: ActionFunctionArgs) {
           id: customerInDB.id
         }
       }
+    }
+  });
+
+  const totalReviews = productInDB.totalReviews + 1;
+  const avgRate = Math.round(((productInDB.avgRate * (productInDB.totalReviews || 0)) + rating) / totalReviews);
+
+  await prisma.product.update({
+    where: { id: productInDB.id },
+    data: {
+      avgRate,
+      totalReviews
     }
   });
 
