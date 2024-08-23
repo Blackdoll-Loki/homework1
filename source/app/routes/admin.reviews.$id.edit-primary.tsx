@@ -1,17 +1,19 @@
 import React, {useCallback} from 'react';
-import {Page} from '@shopify/polaris';
+import {Page, Box} from '@shopify/polaris';
 import {EAdminNavigation} from '~/admin/constants/navigation.constant';
 import {ValidatedForm} from 'remix-validated-form';
 import {ValidatedSubmitButton} from '~/admin/ui/ValidatedSubmitButton/ValidatedSubmitButton';
 import {useRouteLoaderData} from '@remix-run/react';
-import {TAdminCategoriesSingleLoader} from '~/.server/admin/loaders/categories/single/loader';
-import {EditPrimaryForm} from '~/admin/components/categories/EditPrimaryForm/EditPrimaryForm';
-import {editPrimaryFormValidator} from '~/admin/components/categories/EditPrimaryForm/EditPrimaryForm.validator';
+import {TAdminReviewsSingleLoader} from '~/.server/admin/loaders/reviews/single/loader';
+import {EditPrimaryForm} from '~/admin/components/reviews/EditPrimaryForm/EditPrimaryForm';
+import {editPrimaryFormValidator} from '~/admin/components/reviews/EditPrimaryForm/EditPrimaryForm.validator';
+import { EAdminReviewAction } from '~/admin/constants/action.constant';
+import { ValidatedAction } from '~/admin/ui/ValidatedAction/ValidatedAction';
 
-export {action} from '~/.server/admin/actions/categories/edit-primary/action';
+export {action} from '~/.server/admin/actions/reviews/single/action';
 
 export default function AdminReviewIdEditPrimary() {
-  const data = useRouteLoaderData<TAdminCategoriesSingleLoader>('routes/admin.categories.$id');
+  const data = useRouteLoaderData<TAdminReviewsSingleLoader>('routes/admin.reviews.$id');
 
   const primaryAction = useCallback(() => (
     <ValidatedSubmitButton text="save" variant="primary"/>
@@ -24,7 +26,7 @@ export default function AdminReviewIdEditPrimary() {
   return (
     <ValidatedForm validator={editPrimaryFormValidator} method="post">
       <Page
-        title="Edit category primary info"
+        title="Edit review primary info"
         backAction={{
           url: `${EAdminNavigation.productsReviews}/${data.review.id}`,
         }}

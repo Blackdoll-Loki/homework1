@@ -12,6 +12,9 @@ export const ValidatedAction = (props: ValidateActionProps) => {
   const {action, tone = 'critical', ...rest} = props;
   const {error} = useField(FORM_ACTION_FIELD);
 
+  console.log('Action being validated:', action);
+
+
   if (!error) {
     return (
       <input type="hidden" name={FORM_ACTION_FIELD} value={action}/>

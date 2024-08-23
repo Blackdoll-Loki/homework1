@@ -44,9 +44,9 @@ export const NewReviewCard: FC<Props> = (props) => {
           <ValidatedTextField
             label="Product"
             type="text"
-            name="product"
+            name="title"
             autoComplete="off"
-            defaultValue={review?.product.id}
+            defaultValue={review?.product.title}
           />
           <ValidatedTextField
               label="First Name"
