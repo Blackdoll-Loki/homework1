@@ -4,19 +4,23 @@ import {PrimaryInfoCard} from './PrimaryInfoCard';
 import {TProductDto} from '~/.server/admin/dto/product.dto';
 import {CategoryCard} from '~/admin/components/products/Single/CategoryCard';
 import {TCategoryDto} from '~/.server/admin/dto/category.dto';
+import { TReviewDto } from '~/.server/admin/dto/review.dto';
+import { ReviewsTable } from './ReviewsTable';
 
 export type SingleProps = {
   product: TProductDto;
   categories: TCategoryDto[];
+  reviews: TReviewDto[];
 }
 
-export const Single: FC<SingleProps> = ({product, categories}) => {
+export const Single: FC<SingleProps> = ({product, categories, reviews}) => {
   return (
     <Layout>
       <Layout.Section>
         <BlockStack gap="500">
           <PrimaryInfoCard product={product}/>
         </BlockStack>
+
       </Layout.Section>
 
       <Layout.Section variant="oneThird">

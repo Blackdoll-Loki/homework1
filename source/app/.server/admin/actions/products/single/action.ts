@@ -28,6 +28,8 @@ export async function action({request, params}: ActionFunctionArgs) {
   }
 
   const formData = await request.formData();
+
+
   switch (formData.get(FORM_ACTION_FIELD)) {
     case EAdminProductAction.updateCategory:
       return editCategory({id: product.id, formData});

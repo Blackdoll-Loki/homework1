@@ -11,7 +11,7 @@ export {action} from '~/.server/admin/actions/products/single/action';
 export default function AdminProductsIdIndex() {
   const data = useRouteLoaderData<TAdminProductsSingleLoader>('routes/admin.products.$id');
   const [active, setActive] = useState(false);
-
+  console.log('data', data)
   const toggleActive = useCallback(() => setActive((active) => !active), []);
 
   const deleteAction = useMemo(() => (

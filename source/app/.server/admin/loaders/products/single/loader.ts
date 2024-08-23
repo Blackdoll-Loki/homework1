@@ -5,6 +5,7 @@ import {prisma} from '~/.server/shared/services/prisma.service';
 import {productMapper} from '~/.server/admin/mappers/product.mapper';
 import {SerializeFrom} from '@remix-run/server-runtime';
 import {categoryMapper} from '~/.server/admin/mappers/category.mapper';
+import { reviewMapper } from '~/.server/admin/mappers/review.mapper';
 
 export async function loader({request, params}: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {
@@ -35,7 +36,14 @@ export async function loader({request, params}: LoaderFunctionArgs) {
     }
   });
 
-  return json({product: productMapper(product), categories: categories.map(categoryMapper)});
+  const reviews = await prisma.review.findMany({
+    where: {
+      productId: Number(id),
+    }
+  });
+
+
+  return json({product: productMapper(product), categories: categories.map(categoryMapper), reviews: reviews.map(reviewMapper)});
 }
 
 export type TAdminProductsSingleLoader = typeof loader;
