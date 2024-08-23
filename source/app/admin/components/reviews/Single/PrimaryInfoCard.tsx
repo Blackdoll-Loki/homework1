@@ -9,7 +9,6 @@ export type PrimaryInfoCardProps = {
 }
 
 export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
-  console.log('hi from primary', review)
   return (
     <Card>
       <BlockStack gap="200">
@@ -36,7 +35,7 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
             Product Id
           </Text>
           <Text as="p" variant="bodyMd">
-            {review.product?.id || 'blablabal'}
+            {review.product?.id}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
@@ -44,7 +43,7 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
             Customer Id
           </Text>
           <Text as="p" variant="bodyMd">
-            {review.customer?.id || 'blablabal'}
+            {review.customer?.id}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
@@ -52,7 +51,7 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
             Rating
           </Text>
           <Text as="p" variant="bodyMd">
-            {review.rating || 'blablabal'}
+            {review.rating}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
@@ -60,7 +59,7 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
             Review
           </Text>
           <Text as="p" variant="bodyMd">
-            {review.review || 'blablabal'}
+            {review.review}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
@@ -68,7 +67,7 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
             Created At
           </Text>
           <Text as="p" variant="bodyMd">
-            {review.createdAt || 'blablabal'}
+            {review.createdAt}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
@@ -76,7 +75,7 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
             Updated At
           </Text>
           <Text as="p" variant="bodyMd">
-            {review.updatedAt || 'blablabal'}
+            {review.updatedAt}
           </Text>
         </BlockStack>
       </BlockStack>

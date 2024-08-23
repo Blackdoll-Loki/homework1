@@ -2,9 +2,15 @@ import {BlockStack, Card, FormLayout, Text, SelectProps} from '@shopify/polaris'
 import React, {FC, useMemo} from 'react';
 import {ValidatedTextField} from '~/admin/ui/ValidatedTextField/ValidatedTextField';
 import { ValidatedSelect } from '~/admin/ui/ValidatedSelect/ValidatedSelect';
+import { TReviewDto } from '~/.server/admin/dto/review.dto';
 
 
-export const NewReviewCard = () => {
+type Props = {
+  review?: Omit<TReviewDto, 'review'>
+}
+
+export const NewReviewCard: FC<Props> = (props) => {
+  const {review} = props;
 
   const rateOptions: SelectProps['options'] = useMemo(() => ([
     {
@@ -40,18 +46,21 @@ export const NewReviewCard = () => {
             type="text"
             name="product"
             autoComplete="off"
+            defaultValue={review?.product.id}
           />
           <ValidatedTextField
               label="First Name"
               type="text"
               name="firstName"
               autoComplete="given-name"
+              defaultValue={review?.customer.firstName}
             />
           <ValidatedTextField
               label="Last Name"
               type="text"
               name="lastName"
               autoComplete="family-name"
+              defaultValue={review?.customer.lastName}
           />
           <ValidatedSelect
             label="Rating"
@@ -64,6 +73,7 @@ export const NewReviewCard = () => {
             name="review"
             multiline={4}
             autoComplete="off"
+            defaultValue={review?.review}
           />
         </FormLayout>
       </BlockStack>
