@@ -23,15 +23,19 @@ export const Index: FC<ListProps> = ({reviews, query, pagination}) => {
   }), []);
 
   const headings: NonEmptyArray<IndexTableHeading> = useMemo(() => ([
-    {title: 'review id'},
-    {title: 'product id'},
-    {title: 'customer id'},
-    {title: 'review'},
+    {title: 'Review Id'},
+    {title: 'Product Id'},
+    {title: 'Customer Id'},
+    {title: 'Review'},
+    {title: 'Rating'},
+    {title: 'Created At'},
+    {title: 'Deleted At'},
+
   ]), []);
 
   const rowMarkup = reviews.map(
     (
-      {id,review,rating,customer,product}, index
+      {id,review,rating,customer,product, createdAt, deletedAt}, index
     ) => (
       <IndexTable.Row
         id={id}
@@ -41,9 +45,13 @@ export const Index: FC<ListProps> = ({reviews, query, pagination}) => {
         <IndexTable.Cell>
           <Link url={`${EAdminNavigation.productsReviews}/${id}`}>{id}</Link>
         </IndexTable.Cell>
-        <IndexTable.Cell>{product?.id || '-/-'}</IndexTable.Cell>
-        <IndexTable.Cell>{customer?.id || '-/-'}</IndexTable.Cell>
-        <IndexTable.Cell>{review || '-/-'}</IndexTable.Cell>
+        <IndexTable.Cell>{product.id || '-/-'}</IndexTable.Cell>
+        <IndexTable.Cell>{customer.firstName + ' ' + customer.lastName}</IndexTable.Cell>
+        <IndexTable.Cell>{review.slice(0, 15)}</IndexTable.Cell>
+        <IndexTable.Cell>{rating}</IndexTable.Cell>
+        <IndexTable.Cell>{createdAt}</IndexTable.Cell>
+        <IndexTable.Cell>{deletedAt}</IndexTable.Cell>
+
       </IndexTable.Row>
     ),
   );

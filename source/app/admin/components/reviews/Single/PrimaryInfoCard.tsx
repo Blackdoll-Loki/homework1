@@ -2,14 +2,14 @@ import {BlockStack, Button, Card, InlineGrid, Text} from '@shopify/polaris';
 import {EAdminNavigation} from '~/admin/constants/navigation.constant';
 import {EditIcon} from '@shopify/polaris-icons';
 import React, {FC} from 'react';
-import {TProductDto} from '~/.server/admin/dto/product.dto';
 import { TReviewDto } from '~/.server/admin/dto/review.dto';
 
 export type PrimaryInfoCardProps = {
   review: TReviewDto
 }
 
-export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({product}) => {
+export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({review}) => {
+  console.log('hi from primary', review)
   return (
     <Card>
       <BlockStack gap="200">
@@ -18,81 +18,65 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({product}) => {
             Primary info
           </Text>
           <Button
-            url={`${EAdminNavigation.products}/${product.id}/edit-primary`}
+            url={`${EAdminNavigation.productsReviews}/${review.id}/edit-primary`}
             accessibilityLabel="Edit primary info"
             icon={EditIcon}
           />
         </InlineGrid>
         <BlockStack gap="200">
           <Text as="h3" variant="headingXs" fontWeight="medium">
-            Slug
+            Review Id
           </Text>
           <Text as="p" variant="bodyMd">
-            {product.slug}
+            {review.id}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
           <Text as="h3" variant="headingXs" fontWeight="medium">
-            Title
+            Product Id
           </Text>
           <Text as="p" variant="bodyMd">
-            {product.title}
+            {review.product?.id || 'blablabal'}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
           <Text as="h3" variant="headingXs" fontWeight="medium">
-            Description
+            Customer Id
           </Text>
           <Text as="p" variant="bodyMd">
-            {product.description}
+            {review.customer?.id || 'blablabal'}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
           <Text as="h3" variant="headingXs" fontWeight="medium">
-            SKU
+            Rating
           </Text>
           <Text as="p" variant="bodyMd">
-            {product.sku}
+            {review.rating || 'blablabal'}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
           <Text as="h3" variant="headingXs" fontWeight="medium">
-            Barcode
+            Review
           </Text>
           <Text as="p" variant="bodyMd">
-            {product.barcode}
+            {review.review || 'blablabal'}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
           <Text as="h3" variant="headingXs" fontWeight="medium">
-            Quantity
+            Created At
           </Text>
           <Text as="p" variant="bodyMd">
-            {product.quantity}
+            {review.createdAt || 'blablabal'}
           </Text>
         </BlockStack>
         <BlockStack gap="200">
-          <Text as="h3" variant="headingXs" fontWeight="medium">
-            Price
+        <Text as="h3" variant="headingXs" fontWeight="medium">
+            Updated At
           </Text>
           <Text as="p" variant="bodyMd">
-            {product.price}
-          </Text>
-        </BlockStack>
-        <BlockStack gap="200">
-          <Text as="h3" variant="headingXs" fontWeight="medium">
-            Compare at price
-          </Text>
-          <Text as="p" variant="bodyMd">
-            {product.compareAtPrice}
-          </Text>
-        </BlockStack>
-        <BlockStack gap="200">
-          <Text as="h3" variant="headingXs" fontWeight="medium">
-            Cost per item
-          </Text>
-          <Text as="p" variant="bodyMd">
-            {product.costPerItem}
+            {review.updatedAt || 'blablabal'}
           </Text>
         </BlockStack>
       </BlockStack>
