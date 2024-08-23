@@ -36,14 +36,14 @@ export async function loader({request, params}: LoaderFunctionArgs) {
     }
   });
 
-  const reviews = await prisma.review.findMany({
-    where: {
-      productId: Number(id),
-    }
-  });
+  // const reviews = await prisma.review.findMany({
+  //   where: {
+  //     productId: Number(id),
+  //   }
+  // });
 
 
-  return json({product: productMapper(product), categories: categories.map(categoryMapper), reviews: reviews.map(reviewMapper)});
+  return json({product: productMapper(product), categories: categories.map(categoryMapper), /*reviews: reviews.map(reviewMapper)*/});
 }
 
 export type TAdminProductsSingleLoader = typeof loader;
