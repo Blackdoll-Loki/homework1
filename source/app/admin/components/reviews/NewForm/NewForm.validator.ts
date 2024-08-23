@@ -8,7 +8,7 @@ export const firstNameRule = z.string().trim().min(1, {message: 'Customer first 
 export const lastNameRule = z.string().trim().min(1, {message: 'Customer last name is required'});
 export const newFormValidator = withZod(
   z.object({
-    product: productRule,
+    title: productRule,
     firstName: firstNameRule,
     lastName: lastNameRule,
     rating: ratingRule,

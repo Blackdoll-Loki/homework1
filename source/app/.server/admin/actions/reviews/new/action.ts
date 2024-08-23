@@ -21,15 +21,15 @@ export async function action({request}: ActionFunctionArgs) {
     return validationError(data.error);
   }
 
-  const {product, review, customer} = data.data;
+  const {title, review, customer} = data.data;
 
   const rating = parseInt(data.data.rating, 10);
 
   const productInDB = await prisma.product.findFirst({
     where: {
       OR: [
-        { title: data.data.product },
-        { slug: data.data.product },
+        { title: data.data.title },
+        { slug: data.data.title },
       ],
     },
   });
