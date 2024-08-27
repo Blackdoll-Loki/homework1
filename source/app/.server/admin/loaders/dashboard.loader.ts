@@ -3,6 +3,7 @@ import {authenticator} from '~/.server/admin/services/auth.service';
 import {EAdminNavigation} from '~/admin/constants/navigation.constant';
 import {userMapper} from '~/.server/admin/mappers/user.mapper';
 import {prisma} from '~/.server/shared/services/prisma.service';
+import { redirect } from 'node_modules/@remix-run/node/dist/index';
 
 export async function adminDashboardLoader({request}: LoaderFunctionArgs) {
   const {id} = await authenticator.isAuthenticated(request, {

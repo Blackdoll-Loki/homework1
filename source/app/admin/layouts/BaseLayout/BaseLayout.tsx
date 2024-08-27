@@ -3,6 +3,7 @@ import {FC, PropsWithChildren, useCallback, useState} from 'react';
 import {BaseNav} from '~/admin/navigations/BaseNav/BaseNav';
 import {AppBar} from '~/admin/components/AppBar/AppBar';
 import {TUserDto} from '~/.server/admin/dto/user.dto';
+import { StuffBaseNav } from '~/admin/navigations/BaseNav/StuffBaseNav';
 
 export type BaseLayoutProps = PropsWithChildren<{
   user: TUserDto;
@@ -32,7 +33,7 @@ export const BaseLayout: FC<BaseLayoutProps> = ({children, user}) => {
     <Frame
       logo={logo}
       topBar={<AppBar user={user} onNavigationToggle={toggleMobileNavigationActive}/>}
-      navigation={<BaseNav/>}
+      navigation={user.role === 'ADMIN' ? <BaseNav/> : <StuffBaseNav/>}
       showMobileNavigation={mobileNavigationActive}
       onNavigationDismiss={toggleMobileNavigationActive}
     >
