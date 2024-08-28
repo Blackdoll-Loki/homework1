@@ -26,7 +26,8 @@ export async function adminLoader({request}: LoaderFunctionArgs) {
   if (user.role !== 'ADMIN') {
     if (
       request.url.includes(EAdminNavigation.dashboard) ||
-      request.url.includes(EAdminNavigation.products)
+      request.url.includes(EAdminNavigation.products) ||
+      request.url.includes(EAdminNavigation.authLogout)
     ) {
       return json({ user: userMapper(user) });
     } else {
