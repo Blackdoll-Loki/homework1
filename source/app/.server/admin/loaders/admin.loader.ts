@@ -20,20 +20,5 @@ export async function adminLoader({request}: LoaderFunctionArgs) {
     return await authenticator.logout(request, {redirectTo: EAdminNavigation.authLogin});
   }
 
-
-  console.log('request.url.includes(EAdminNavigation.dashboard)', request.url.includes(EAdminNavigation.dashboard))
-  console.log('user.role not admin', user.role !== 'ADMIN')
-  if (user.role !== 'ADMIN') {
-    if (
-      request.url.includes(EAdminNavigation.dashboard) ||
-      request.url.includes(EAdminNavigation.products) ||
-      request.url.includes(EAdminNavigation.authLogout)
-    ) {
-      return json({ user: userMapper(user) });
-    } else {
-      return redirect(EAdminNavigation.dashboard);
-    }
-  }
-
   return json({user: userMapper(user)});
 }
