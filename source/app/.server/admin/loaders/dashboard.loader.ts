@@ -1,20 +1,11 @@
-import {json, LoaderFunctionArgs} from '@remix-run/node';
-import {authenticator} from '~/.server/admin/services/auth.service';
+import {json, LoaderFunctionArgs, redirect} from '@remix-run/node';
+import {authenticator, getAuthUser} from '~/.server/admin/services/auth.service';
 import {EAdminNavigation} from '~/admin/constants/navigation.constant';
 import {userMapper} from '~/.server/admin/mappers/user.mapper';
 import {prisma} from '~/.server/shared/services/prisma.service';
-import { redirect } from 'node_modules/@remix-run/node/dist/index';
 
 export async function adminDashboardLoader({request}: LoaderFunctionArgs) {
-  const {id} = await authenticator.isAuthenticated(request, {
-    failureRedirect: EAdminNavigation.authLogin,
-  });
-
-  const user = await prisma.user.findUnique({where: {id, deletedAt: null}});
-
-  if (!user) {
-    return await authenticator.logout(request, {redirectTo: EAdminNavigation.authLogin});
-  }
+  const user = await getAuthUser(request)
 
   return json({user: userMapper(user)});
 }

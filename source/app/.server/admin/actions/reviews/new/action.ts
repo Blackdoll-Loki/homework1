@@ -1,5 +1,5 @@
 import {ActionFunctionArgs, redirect} from '@remix-run/node';
-import {authenticator} from '~/.server/admin/services/auth.service';
+import {authenticator, getAuthUser} from '~/.server/admin/services/auth.service';
 import {EAdminNavigation} from '~/admin/constants/navigation.constant';
 import {validationError} from 'remix-validated-form';
 import {prisma} from '~/.server/shared/services/prisma.service';
@@ -7,10 +7,8 @@ import {newFormValidator} from '~/admin/components/reviews/NewForm/NewForm.valid
 ;
 
 export async function action({request}: ActionFunctionArgs) {
-  await authenticator.isAuthenticated(request, {
-    failureRedirect: EAdminNavigation.authLogin,
-  });
-  console.log('Hi from action')
+  await getAuthUser(request)
+
   // validate form data
   const data = await newFormValidator.validate(
     await request.formData()
