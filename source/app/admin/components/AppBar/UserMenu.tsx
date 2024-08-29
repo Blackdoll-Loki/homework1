@@ -8,10 +8,12 @@ import {ExitIcon} from '@shopify/polaris-icons';
 export type TUserMenuProps = {
   user: TUserDto;
   userMenuActive: boolean;
-  toggleUserMenuActive: () => void
+  toggleUserMenuActive: () => void;
 }
 
 export const UserMenu: FC<TUserMenuProps> = ({userMenuActive, user, toggleUserMenuActive}) => {
+
+  console.log('user',user)
 
   const userMenuActions: UserMenuProps['actions'] = useMemo(() => (
     [
