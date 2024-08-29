@@ -6,9 +6,11 @@ import {EAdminReviewAction, FORM_ACTION_FIELD} from '~/admin/constants/action.co
 import {validationError} from 'remix-validated-form';
 import {editReview} from '~/.server/admin/actions/reviews/single/edit-review';
 import { deleteReview } from './delete-review';
+import { hasAdminRoleOrRedirect } from '~/.server/shared/utils/auth.util';
 
 export async function action({request, params}: ActionFunctionArgs) {
-  await getAuthUser(request)
+  const authUser = await getAuthUser(request)
+  hasAdminRoleOrRedirect(authUser)
 
   const {id} = params;
   if (!id) {
