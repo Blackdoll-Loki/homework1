@@ -12,7 +12,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <BaseLayout user={data.user}>
+    <BaseLayout user={data.user} title={data.title}>
       <Outlet/>
     </BaseLayout>
   );
