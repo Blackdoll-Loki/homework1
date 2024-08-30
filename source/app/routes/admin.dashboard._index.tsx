@@ -9,7 +9,7 @@ export default function DashboardIndex() {
 
   return (
     <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Admin</h1>
+      <h1 className="text-3xl">{data.title}</h1>
       <pre>
         {JSON.stringify(data, null, 2)}
       </pre>
