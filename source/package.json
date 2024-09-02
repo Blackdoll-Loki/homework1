@@ -27,6 +27,10 @@
     "i18next": "^23.14.0",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-fs-backend": "^2.3.2",
+<<<<<<< HEAD
+=======
+    "i18next-http-backend": "^2.6.1",
+>>>>>>> f63427b (install few packages)
     "isbot": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

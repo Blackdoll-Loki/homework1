@@ -13,8 +13,6 @@ export type TUserMenuProps = {
 
 export const UserMenu: FC<TUserMenuProps> = ({userMenuActive, user, toggleUserMenuActive}) => {
 
-  console.log('user',user)
-
   const userMenuActions: UserMenuProps['actions'] = useMemo(() => (
     [
       {
