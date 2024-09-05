@@ -2,18 +2,13 @@ import {Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration,useLoaderDat
 import { json } from '@remix-run/node';
 import { useChangeLanguage } from "remix-i18next/react";
 import { useTranslation } from "react-i18next";
-import i18next from "~/i18next.server";
+import i18next from "~/.server/shared/services/i18next.service";
 import { i18nCookie } from '~/public/cookie'
 
 
 export async function loader({ request }: LoaderArgs) {
 	let locale = await i18next.getLocale(request);
-  console.log('serialized locale in json',json({ locale }, {
-    headers: {"Set-Cookie": await i18nCookie.serialize(locale)}
-  }))
-	return json({ locale }, {
-    headers: {"Set-Cookie": await i18nCookie.serialize(locale)}
-  });
+	return json({ locale });
 }
 
 //GET 3000/
