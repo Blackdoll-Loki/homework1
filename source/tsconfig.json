@@ -8,7 +8,7 @@
     "**/.client/**/*.tsx",
     "prisma/*.ts",
     "prisma/**/*.ts"
-  ],
+, "public/cookie.ts"  ],
   "compilerOptions": {
     "lib": [
       "DOM",

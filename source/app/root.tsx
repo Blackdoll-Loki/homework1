@@ -3,12 +3,20 @@ import { json } from '@remix-run/node';
 import { useChangeLanguage } from "remix-i18next/react";
 import { useTranslation } from "react-i18next";
 import i18next from "~/i18next.server";
+import { i18nCookie } from '~/public/cookie'
+
 
 export async function loader({ request }: LoaderArgs) {
 	let locale = await i18next.getLocale(request);
-	return json({ locale });
+  console.log('serialized locale in json',json({ locale }, {
+    headers: {"Set-Cookie": await i18nCookie.serialize(locale)}
+  }))
+	return json({ locale }, {
+    headers: {"Set-Cookie": await i18nCookie.serialize(locale)}
+  });
 }
 
+//GET 3000/
 export let handle = {
 	// In the handle export, we can add a i18n key with namespaces our route
 	// will need to load. This key can be a single string or an array of strings.
@@ -27,7 +35,7 @@ export function Layout({children}: { children: React.ReactNode }) {
 	// language, this locale will change and i18next will load the correct
 	// translation files
 	useChangeLanguage(locale);
-
+  console.log('locale',locale)
   return (
 		<html lang={locale} dir={i18n.dir()}>
     <head>

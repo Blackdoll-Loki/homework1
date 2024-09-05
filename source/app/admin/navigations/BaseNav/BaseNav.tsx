@@ -5,6 +5,7 @@ import {useLocation} from 'react-router';
 import { FC, useMemo } from 'react';
 import { hasAdminRole } from '~/admin/utils/access.util';
 import { TUserDto } from '~/.server/admin/dto/user.dto';
+import { useTranslation } from "react-i18next";
 
 type Props = {
   user: TUserDto;
@@ -12,19 +13,20 @@ type Props = {
 
 export const BaseNav: FC<Props> = ({ user }) => {
   const location = useLocation();
+  let { t } = useTranslation();
 
   const items = useMemo(() => {
     if (!hasAdminRole(user)) {
       return [
         {
           url: EAdminNavigation.dashboard,
-          label: 'Home',
+          label: t("home"),
           icon: HomeIcon,
           matchPaths: [EAdminNavigation.dashboard],
         },
         {
           url: EAdminNavigation.products,
-          label: 'Products',
+          label: t("products"),
           icon: ProductIcon,
         },
       ];
@@ -33,24 +35,24 @@ export const BaseNav: FC<Props> = ({ user }) => {
     return [
       {
         url: EAdminNavigation.dashboard,
-        label: 'Home',
+        label: t("home"),
         icon: HomeIcon,
         matchPaths: [EAdminNavigation.dashboard]
       },
       {
         url: EAdminNavigation.users,
-        label: 'Users',
+        label: t("users"),
         icon: WorkIcon,
         matchPaths: [EAdminNavigation.users]
       },
       {
         url: EAdminNavigation.customers,
-        label: 'Customers',
+        label: t("customers"),
         icon: PersonIcon,
       },
       {
         url: EAdminNavigation.products,
-        label: 'Products',
+        label: t("products"),
         icon: ProductIcon,
         subNavigationItems: [
           {
@@ -67,7 +69,7 @@ export const BaseNav: FC<Props> = ({ user }) => {
       },
       {
         url: EAdminNavigation.orders,
-        label: 'Orders',
+        label: t("orders"),
         icon: OrderIcon,
         subNavigationItems: [
           {
