@@ -20,6 +20,7 @@ model User {
   email     String    @unique
   password  String
   role      AdminRole @default(STUFF)
+  language  Language  @default(EN)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
@@ -160,4 +161,9 @@ enum ProductStatus {
   ACTIVE
   DRAFT
   ARCHIVED
+}
+
+enum Language {
+  EN
+  UK
 }

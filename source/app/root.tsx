@@ -2,12 +2,13 @@ import {Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration,useLoaderDat
 import { json } from '@remix-run/node';
 import { useChangeLanguage } from "remix-i18next/react";
 import { useTranslation } from "react-i18next";
-import i18next from "~/.server/shared/services/i18next.service";
+import i18nextServer from "~/.server/shared/services/i18next.service";
 import { i18nCookie } from '~/public/cookie'
+import i18n from './admin/locale/i18n';
 
 
 export async function loader({ request }: LoaderArgs) {
-	let locale = await i18next.getLocale(request);
+	let locale = await i18nextServer.getLocale(request);
 	return json({ locale });
 }
 
@@ -21,16 +22,14 @@ export let handle = {
 };
 
 export function Layout({children}: { children: React.ReactNode }) {
-  let { locale } = useLoaderData<typeof loader>();
-
-	let { i18n } = useTranslation();
+  const { locale } = useLoaderData<typeof loader>();
+	const { i18n } = useTranslation();
 
 	// This hook will change the i18n instance language to the current locale
 	// detected by the loader, this way, when we do something to change the
 	// language, this locale will change and i18next will load the correct
 	// translation files
 	useChangeLanguage(locale);
-  console.log('locale',locale)
   return (
 		<html lang={locale} dir={i18n.dir()}>
     <head>

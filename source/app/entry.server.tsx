@@ -7,11 +7,12 @@ import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 import { createInstance } from "i18next";
-import i18next from "./.server/shared/services/i18next.service";
+import i18nextServer from "~/.server/shared/services/i18next.service";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import Backend from "i18next-fs-backend";
 import i18n from "./admin/locale/i18n"; // your i18n configuration file
 import { resolve } from "node:path";
+import { containsInsensitive } from "./.server/shared/utils/prisma.util";
 
 const ABORT_DELAY = 5000;
 
@@ -26,9 +27,8 @@ export default async function handleRequest(
 		: "onShellReady";
 
 	let instance = createInstance();
-	let lng = await i18next.getLocale(request);
-	let ns = i18next.getRouteNamespaces(remixContext);
-
+	let lng = await i18nextServer.getLocale(request);
+	let ns = i18nextServer.getRouteNamespaces(remixContext);
 	await instance
 		.use(initReactI18next) // Tell our instance to use react-i18next
 		.init({
